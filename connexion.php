@@ -21,7 +21,7 @@
                 $sqlState->execute([$login,$password]);
                 if($sqlState->rowCount()>=1){
                   session_start();
-                  $_SESSION['utilisateur']=$sqlState->fetch();
+                  $_SESSION['utilisateur'] = $sqlState->fetch();
                   header('location:admin.php');
                 }
                 else{

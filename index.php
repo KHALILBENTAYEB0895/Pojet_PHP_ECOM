@@ -10,6 +10,7 @@
 <body>
    <?php include'include\navbar.php'?>
    <div class="container py-2">
+    <h4>Ajouter utilisateur</h4>
     <?php
         if(isset($_POST['ajouter'])){
             $login = $_POST['login'];
