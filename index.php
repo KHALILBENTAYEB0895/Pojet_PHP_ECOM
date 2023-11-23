@@ -9,6 +9,29 @@
 </head>
 <body>
    <?php include'include\navbar.php'?>
+   <div class="container py-2">
+    <?php
+        if(isset($_POST['ajouter'])){
+            $login = $_POST['login'];
+            $passWord = $_POST['password'];
+
+            if(!empty($login) && !empty($passWord)){
+                require_once 'include\pdo.php';
+                $date = date('Y-m-d');
+                $sqlState = $pdo->prepare('INSERT INTO utilisateur VALUES(null,?,?,?)');
+                $sqlState->execute([$login,$passWord,$date]);
+                header('');
+            }else{
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    <strong>login et password sont obligatoires</strong>
+                </div>
+                <?php
+            }
+
+
+        }
+    ?>
    <form method="post">
         <div class="mb-3">
             <label class="form-label">Login</label>
@@ -18,6 +41,8 @@
             <label class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
+        <input type="submit" value="Ajouter utilisateur" class="btn btn-primary" name="ajouter">
    </form>
+   </div>
 </body>
 </html>
