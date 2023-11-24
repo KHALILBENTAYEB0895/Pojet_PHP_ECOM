@@ -15,7 +15,7 @@
                 header('location: connexion.php');
             }else{
                 ?>
-                <h3>Bonjour :<?php echo $_SESSION['utilisateur']['login'];?></h3>
+                <h3>Bonjour : <?php echo $_SESSION['utilisateur']['login'];?></h3>
                 <?php
             }
         ?>
