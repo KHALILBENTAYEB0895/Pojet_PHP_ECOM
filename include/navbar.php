@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  $isConnected = false;
+  if(isset($_SESSION['utilisateur'])){
+    $isConnected = true;
+  }
+  var_dump($isConnected);
+?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Ecommerce</a>
@@ -6,8 +14,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="index.php">Ajouter utlisateur</a>
-        <a class="nav-link active" href="connexion.php">Connexion</a>
+        <a class="nav-link " aria-current="page" href="index.php">Ajouter utlisateur</a>
+        <?php
+            if($isConnected){
+              ?>
+                  <a class="nav-link " aria-current="page" href="ajouter_categorie.php">Ajouter categorie</a>
+                  <a class="nav-link " aria-current="page" href="ajouter_produit.php">Ajouter produit</a>
+              <?php
+            }
+            else{
+              ?>
+                  <a class="nav-link " href="connexion.php">Connexion</a>
+              <?php
+            }
+        ?>
       </div>
     </div>
   </div>
