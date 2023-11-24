@@ -42,7 +42,7 @@
             <label class="form-label">password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
-        <input type="submit" value="Ajouter utilisateur" class="btn btn-primary" name="ajouter">
+        <input type="submit" value="S'inscrire" class="btn btn-primary" name="ajouter">
    </form>
    </div>
 </body>

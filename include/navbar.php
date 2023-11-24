@@ -14,12 +14,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link " aria-current="page" href="index.php">Ajouter utlisateur</a>
+        <a class="nav-link " aria-current="page" href="index.php">S'inscrire</a>
         <?php
             if($isConnected){
               ?>
                   <a class="nav-link " aria-current="page" href="ajouter_categorie.php">Ajouter categorie</a>
                   <a class="nav-link " aria-current="page" href="ajouter_produit.php">Ajouter produit</a>
+                  <a class="nav-link " aria-current="page" href="deconnexion.php">Deconnexion</a>
+
               <?php
             }
             else{
