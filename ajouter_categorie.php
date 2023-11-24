@@ -12,18 +12,38 @@
    <div class="container py-2">
     <h4>Ajouter Categorie</h4>
     <?php
+        if(isset($_POST['ajouter'])){
+            $libelle = $_POST['libelle'];
+            $description = $_POST['description'];
 
+            if(!empty($libelle) && !empty($description)){
+                require_once 'include\pdo.php';
+                $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description) values(?,?)');
+                $sqlState->execute([$libelle,$description]);
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        <strong> La categorie <?php echo $libelle?> bien est ajoutee</strong>
+                    </div>
+                <?php
+            }else{
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Libelle , description sont obligatoires</strong>
+                    </div>
+                <?php
+            }
+        }
     ?>
    <form method="post">
         <div class="mb-3">
-            <label class="form-label">Login</label>
-            <input type="text" class="form-control" id="login" name="login">
+            <label class="form-label">Libelle</label>
+            <input type="text" class="form-control" name="libelle">
         </div>
         <div class="mb-3">
-            <label class="form-label">password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description"></textarea>
         </div>
-        <input type="submit" value="Ajouter utilisateur" class="btn btn-primary" name="ajouter">
+        <input type="submit" value="Ajouter categorie" class="btn btn-primary" name="ajouter">
    </form>
    </div>
 </body>
