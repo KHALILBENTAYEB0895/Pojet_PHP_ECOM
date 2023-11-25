@@ -8,25 +8,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-   <?php include'include\navbar.php'?>
+   <?php 
+        include'include\navbar.php';
+        require_once'include\pdo.php';
+    ?>
    <div class="container py-2">
     <h4>Ajouter Categorie</h4>
     <?php
         
     ?>
    <form method="post">
-        <div class="mb-3">
+        <div class="my-3">
             <label class="form-label">Libelle</label>
             <input type="text" class="form-control" name="libelle">
         </div>
         <div class="mb-3">
-            <label class="form-label">Libelle</label>
-            <input type="number" class="form-control" name="prix">
+            <label class="form-label">Prix</label>
+            <input type="number" class="form-control" name="prix" min="0">
         </div>
         <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea class="form-control" name="description"></textarea>
+            <label class="form-label">Reduction</label>
+            <input type="number" class="form-control" name="prix" min="0" max="99">
         </div>
+        <div class="mb-3">
+            <label class="form-label">Categorie</label>
+            <?php
+                $categories = $pdo->query('SELECT * FROM categorie');
+            ?>
+            <select class="form-select" aria-label="Default select example" name="categorie">
+                <option selected>Choisissez une categorie</option>
+                <?php
+                    foreach($categories as $categorie){
+                        echo"<option value='".$categorie['id']."'>".$categorie['libelle']."</option>";
+                    }
+                ?>
+                
+            </select>
+        </div>
+        
         <input type="submit" value="Ajouter categorie" class="btn btn-primary" name="ajouter">
    </form>
    </div>
