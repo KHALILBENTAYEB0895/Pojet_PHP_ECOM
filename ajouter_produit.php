@@ -13,9 +13,30 @@
         require_once'include\pdo.php';
     ?>
    <div class="container py-2">
-    <h4>Ajouter Categorie</h4>
+    <h4>Ajouter Produit</h4>
     <?php
-        
+        if(isset($_POST['ajouter'])){
+            $libelle = $_POST['libelle'];
+            $prix = $_POST['prix'];
+            $reduction = $_POST['reduction'];
+            $categorie = $_POST['categorie'];
+
+            if(!empty($libelle) && !empty($prix) && !empty($categorie)){
+                $sqlState = $pdo->prepare('INSERT INTO produit(libelle,prix,reduction,id_categorie) VALUES(?,?,?,?)');
+                $sqlState->execute([$libelle,$prix,$reduction,$categorie]);
+                ?>
+                <div class="alert alert-success" role="alert">
+                    <strong><?php echo $libelle ?> a ete bien ajoute</strong>
+                </div>
+                <?php
+            }else{
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong> Libelle, prix est categorie sont obligatoires</strong>
+                    </div>
+                <?php
+            }
+        }
     ?>
    <form method="post">
         <div class="my-3">
@@ -24,11 +45,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Prix</label>
-            <input type="number" class="form-control" name="prix" min="0">
+            <input type="number" class="form-control" name="prix" step="0.1" min="0">
         </div>
         <div class="mb-3">
             <label class="form-label">Reduction</label>
-            <input type="number" class="form-control" name="prix" min="0" max="99">
+            <input type="number" class="form-control" name="reduction"  min="0" max="99">
         </div>
         <div class="mb-3">
             <label class="form-label">Categorie</label>
@@ -46,7 +67,7 @@
             </select>
         </div>
         
-        <input type="submit" value="Ajouter categorie" class="btn btn-primary" name="ajouter">
+        <input type="submit" value="Ajouter le produit" class="btn btn-primary" name="ajouter">
    </form>
    </div>
 </body>

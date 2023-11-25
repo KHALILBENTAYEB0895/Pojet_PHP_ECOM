@@ -43,7 +43,7 @@
             <label class="form-label">Description</label>
             <textarea class="form-control" name="description"></textarea>
         </div>
-        <input type="submit" value="Ajouter categorie" class="btn btn-primary" name="ajouter">
+        <input type="submit" value="Ajouter la categorie" class="btn btn-primary" name="ajouter">
    </form>
    </div>
 </body>
