@@ -37,8 +37,8 @@
                         <td><?php echo $categorie['description'] ?></td>
                         <td><?php echo $categorie['date_creation'] ?></td>
                         <td>
-                            <a href="modifier_catego.php?id=<?php echo $categorie['id']?>" class="btn btn-success">Modifier</a>
-                            <a href="supprimer_catego.php?id=<?php echo $categorie['id']?>" class="btn btn-danger">Supprimer</a>
+                            <a href="modifier_catego.php?id=<?php echo $categorie['id']?>" class="btn btn-success" >Modifier</a>
+                            <a href="supprimer_catego.php?id=<?php echo $categorie['id']?>" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer la categorie <?php echo $categorie['libelle'] ?>')">Supprimer</a>
                         </td>
                     </tr>
                     <?php
