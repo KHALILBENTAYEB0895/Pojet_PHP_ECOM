@@ -19,6 +19,7 @@
             if($isConnected){
               ?>
                   <a class="nav-link " aria-current="page" href="categories.php">Lise des categories</a>
+                  <a class="nav-link " aria-current="page" href="produits.php">Lise des produits</a>
                   <a class="nav-link " aria-current="page" href="ajouter_categorie.php">Ajouter une categorie</a>
                   <a class="nav-link " aria-current="page" href="ajouter_produit.php">Ajouter un produit</a>
                   <a class="nav-link " aria-current="page" href="deconnexion.php">Deconnexion</a>
