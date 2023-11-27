@@ -44,8 +44,8 @@
                         <td><?php echo $produit['categorie'] ?></td>
                         <td><?php echo $produit['date_creation'] ?></td>
                         <td>
-                            <input type="submit" class="btn btn-success" value="Modifier">
-                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                            <a href="modifier_prod.php?id=<?php echo $produit['id']?>" class="btn btn-success">Modifier</a>
+                            <a href="supprimer_prod.php?id=<?php echo $produit['id']?>" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                     <?php
