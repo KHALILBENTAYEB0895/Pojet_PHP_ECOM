@@ -45,7 +45,7 @@
                         <td><?php echo $produit['date_creation'] ?></td>
                         <td>
                             <a href="modifier_prod.php?id=<?php echo $produit['id']?>" class="btn btn-success">Modifier</a>
-                            <a href="supprimer_prod.php?id=<?php echo $produit['id']?>" class="btn btn-danger">Supprimer</a>
+                            <a href="supprimer_prod.php?id=<?php echo $produit['id']?>" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer le produit <?php echo $produit['libelle'] ?>')">Supprimer</a>
                         </td>
                     </tr>
                     <?php
