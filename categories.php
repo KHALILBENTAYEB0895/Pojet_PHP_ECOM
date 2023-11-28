@@ -6,6 +6,9 @@
     <title>Liste des Categories</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
    <?php include'include\navbar.php'?>
@@ -20,10 +23,12 @@
         <thead>
             <tr>
                 <th scope="col">#ID</th>
+                <th scope="col">Icone</th>
                 <th scope="col">Libelle</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date de creation</th>
                 <th scope="col">Opérations</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -33,6 +38,7 @@
                     ?>
                     <tr>
                         <td><?php echo $categorie['id'] ?></td>
+                        <td><i class="<?= $categorie['icone'] ?>"></i></td>
                         <td><?php echo $categorie['libelle'] ?></td>
                         <td><?php echo $categorie['description'] ?></td>
                         <td><?php echo $categorie['date_creation'] ?></td>

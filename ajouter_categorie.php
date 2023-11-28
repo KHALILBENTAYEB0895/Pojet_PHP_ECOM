@@ -15,11 +15,11 @@
         if(isset($_POST['ajouter'])){
             $libelle = $_POST['libelle'];
             $description = $_POST['description'];
-
+            $icone = $_POST['icone'];
             if(!empty($libelle) && !empty($description)){
                 require_once 'include\pdo.php';
-                $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description) values(?,?)');
-                $sqlState->execute([$libelle,$description]);
+                $sqlState = $pdo->prepare('INSERT INTO categorie(libelle,description,icone) values(?,?,?)');
+                $sqlState->execute([$libelle,$description,$icone]);
                 ?>
                     <div class="alert alert-success" role="alert">
                         <strong> La categorie <?php echo $libelle?> bien est ajoutee</strong>
@@ -42,6 +42,10 @@
         <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea class="form-control" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Icone</label>
+            <input type="text" class="form-control" name="icone">
         </div>
         <input type="submit" value="Ajouter la categorie" class="btn btn-primary" name="ajouter">
    </form>
