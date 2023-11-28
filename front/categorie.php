@@ -9,7 +9,7 @@ $categorie=$sqlState->fetch(PDO::FETCH_ASSOC);
 
 $sqlState = $pdo->prepare('SELECT * FROM produit Where id_categorie=?');
 $sqlState->execute([$id]);
-$produits=$sqlState->fetchAll(PDO::FETCH_OBJ);
+$produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
 
 var_dump($produits);
 
@@ -29,7 +29,23 @@ var_dump($produits);
     <?php include'../include/navbar_front.php' ?>
    <div class="container py-2">
     <h4><?php echo $categorie['libelle'] ?></h4>
-    
-   </div>
+        <div class="container">
+            <div class="row">
+                <?php
+                    foreach($produits as $produit){
+                        ?>
+                            <div class="card mb-3 col-md-4">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $produit['libelle']?></h5>
+                                    <p class="card-text"><?= $produit['prix']?> MAD</p>
+                                    <p class="card-text"><small class="text-body-secondary">Ajouté le : <?= date_format(date_create($produit['date_creation']),'Y/m/d') ?></small></p>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                ?>
+            </div>
+        </div>
 </body>
 </html>
