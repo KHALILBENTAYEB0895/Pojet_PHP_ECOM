@@ -25,6 +25,8 @@
                 <th scope="col">Reduction</th>
                 <th scope="col">Nouveau prix</th>
                 <th scope="col">Categorie</th>
+                <th scope="col">Image</th>
+                <th scope="col">Descriprion</th>
                 <th scope="col">Date de creation</th>
                 <th scope="col">Opérations</th>
             </tr>
@@ -42,6 +44,8 @@
                         <td><?php echo $produit['reduction']." %"?></td>
                         <td><?php echo $prixFinal ?></td>
                         <td><?php echo $produit['categorie'] ?></td>
+                        <td><img class="img-fluid" width="50px" height="50px" src="upload/produit/<?= $produit['image'] ?>"></td>
+                        <td><?php echo $produit['description'] ?></td>
                         <td><?php echo $produit['date_creation'] ?></td>
                         <td>
                             <a href="modifier_prod.php?id=<?php echo $produit['id']?>" class="btn btn-success">Modifier</a>
