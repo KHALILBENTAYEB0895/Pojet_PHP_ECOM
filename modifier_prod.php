@@ -25,10 +25,18 @@
             $prix = $_POST['prix'];
             $reduction = $_POST['reduction'];
             $id_categorie = $_POST['categorie'];
+            $description = $_POST['description'];
+            
+            $fileName = 'default_image.png';
+            if(!empty($_FILES['image']['name'])){
+                $image = $_FILES['image']['name'];
+                $fileName = uniqid().$image;
+               move_uploaded_file($_FILES['image']['tmp_name'],'upload/produit/'.$fileName);
+            }
 
-            if(!empty($libelle) && !empty($prix) && !empty($prix) && !empty($reduction) && !empty($id_categorie) ){
-                $sqlState = $pdo->prepare('UPDATE produit SET libelle=?, prix=?, reduction=?, id_categorie=? WHERE id=?' );
-                $sqlState->execute([$libelle,$prix,$reduction,$id_categorie,$id]);
+            if(!empty($libelle) && !empty($prix) && !empty($id_categorie) ){
+                $sqlState = $pdo->prepare('UPDATE produit SET libelle=?, prix=?, reduction=?, id_categorie=?, description=?, image=? WHERE id=?' );
+                $sqlState->execute([$libelle,$prix,$reduction,$id_categorie,$description,$fileName,$id]);
                 ?>
                     <div class="alert alert-success" role="alert">
                         <strong> La produit <?php echo $libelle?> bien est ajoutee</strong>
@@ -43,7 +51,7 @@
             }
         }
     ?>
-   <form method="post">
+   <form method="post" enctype="multipart/form-data">
    <div class="my-3">
             <label class="form-label">Libelle</label>
             <input type="text" class="form-control" name="libelle" value="<?php echo $produit['libelle'] ?>">
@@ -70,6 +78,16 @@
                 ?>
                 
             </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description"><?= $produit['description']?></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">image</label>
+            <input type="file" class="form-control" name="image">
         </div>
         
         <input type="submit" value="Modifer la produit" class="btn btn-primary" name="modifier">
