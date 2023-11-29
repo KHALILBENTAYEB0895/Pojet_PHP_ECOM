@@ -33,13 +33,14 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
    <div class="container">
     <h4 class="mt-5"><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
         <div class="container">
-            <div class="row justify-content-evenly mt-5">
+            <div class="row justify-content-between mt-5">
                 <?php
                     foreach($produits as $produit){
                         ?>
-                            <div class="card mb-5 col-md-4 w-25" style="width:100px">
+                            <div class="card mb-5 mx-2 col-md-4 w-25">
                                 <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top" height="200px">
                                 <div class="card-body">
+                                    <a class="btn stretched-link" href="<?php echo "id_produit".$produit['id']?>">Afficher details</a>
                                     <h5 class="card-title"><?= $produit['libelle']?></h5>
                                     <p class="card-text"><?= $produit['prix']?> MAD</p>
                                     <p class="card-text"><small class="text-body-secondary">Ajouté le : <?= date_format(date_create($produit['date_creation']),'Y/m/d') ?></small></p>
