@@ -30,10 +30,10 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php include'../include/navbar_front.php' ?>
-   <div class="container-fluid">
+   <div class="container">
     <h4 class="mt-5"><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
-        <div class="container-fluid">
-            <div class="row justify-content-around mt-5">
+        <div class="container">
+            <div class="row justify-content-evenly mt-5">
                 <?php
                     foreach($produits as $produit){
                         ?>
