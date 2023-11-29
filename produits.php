@@ -11,7 +11,7 @@
    <?php include'include\navbar.php'?>
    
    <div class="container py-2">
-    <h2>Liste des categogies</h2>
+    <h2>Liste des produits</h2>
     <?php
         require_once'include\pdo.php';
         $produits = $pdo->query("SELECT produit.*,categorie.libelle as'categorie'FROM produit INNER JOIN categorie ON produit.id_categorie=categorie.id")->fetchAll(PDO::FETCH_ASSOC);

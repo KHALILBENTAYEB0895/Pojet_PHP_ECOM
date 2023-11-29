@@ -20,10 +20,20 @@
             $prix = $_POST['prix'];
             $reduction = $_POST['reduction'];
             $categorie = $_POST['categorie'];
+            $description = $_POST['description'];
+            // echo "<pre>"; //pour savoir la structure de l'objet
+            // print_r($_FILES);
+            // echo "<pre>";
+            $fileName = "";
+            if(isset($_FILES['image'])){
+                $image = $_FILES['image']['name'];
+                $fileName = uniqid().$image;
+               move_uploaded_file($_FILES['image']['tmp_name'],'upload/produit/'.$fileName);
+            }
 
             if(!empty($libelle) && !empty($prix) && !empty($categorie)){
-                $sqlState = $pdo->prepare('INSERT INTO produit(libelle,prix,reduction,id_categorie) VALUES(?,?,?,?)');
-                $sqlState->execute([$libelle,$prix,$reduction,$categorie]);
+                $sqlState = $pdo->prepare('INSERT INTO produit(libelle,prix,reduction,id_categorie,description,image) VALUES(?,?,?,?,?,?)');
+                $sqlState->execute([$libelle,$prix,$reduction,$categorie,$description,$fileName]);
                 ?>
                 <div class="alert alert-success" role="alert">
                     <strong><?php echo $libelle ?> a ete bien ajoute</strong>
@@ -38,7 +48,7 @@
             }
         }
     ?>
-   <form method="post">
+   <form method="post" enctype="multipart/form-data">
         <div class="my-3">
             <label class="form-label">Libelle</label>
             <input type="text" class="form-control" name="libelle">
@@ -65,6 +75,16 @@
                 ?>
                 
             </select>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description"></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">image</label>
+            <input type="file" class="form-control" name="image">
         </div>
         
         <input type="submit" value="Ajouter le produit" class="btn btn-primary" name="ajouter">
