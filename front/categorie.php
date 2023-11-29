@@ -30,15 +30,15 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php include'../include/navbar_front.php' ?>
-   <div class="container py-2">
-    <h4><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
-        <div class="container">
-            <div class="row">
+   <div class="container-fluid">
+    <h4 class="mt-5"><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
+        <div class="container-fluid">
+            <div class="row justify-content-around mt-5">
                 <?php
                     foreach($produits as $produit){
                         ?>
-                            <div class="card mb-3 col-md-4">
-                                <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top">
+                            <div class="card mb-5 col-md-4 w-25" style="width:100px">
+                                <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top" height="200px">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $produit['libelle']?></h5>
                                     <p class="card-text"><?= $produit['prix']?> MAD</p>
