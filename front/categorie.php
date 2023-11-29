@@ -11,7 +11,7 @@ $sqlState = $pdo->prepare('SELECT * FROM produit Where id_categorie=?');
 $sqlState->execute([$id]);
 $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
 
-var_dump($produits);
+// var_dump($produits);
 
 
 
@@ -38,7 +38,7 @@ var_dump($produits);
                     foreach($produits as $produit){
                         ?>
                             <div class="card mb-3 col-md-4">
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $produit['libelle']?></h5>
                                     <p class="card-text"><?= $produit['prix']?> MAD</p>
