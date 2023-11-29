@@ -24,8 +24,8 @@
             // echo "<pre>"; //pour savoir la structure de l'objet
             // print_r($_FILES);
             // echo "<pre>";
-            $fileName = "";
-            if(isset($_FILES['image'])){
+            $fileName = 'default_image.png';
+            if(!empty($_FILES['image']['name'])){
                 $image = $_FILES['image']['name'];
                 $fileName = uniqid().$image;
                move_uploaded_file($_FILES['image']['tmp_name'],'upload/produit/'.$fileName);
