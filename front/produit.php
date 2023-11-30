@@ -36,15 +36,21 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
                 <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $produit['libelle']?></h5>
-                    <p class="card-text"><?php echo $produit['description']?></p>
-                    <p class="card-text"><small class="text-body-secondary"> prix :<?php echo $produit['prix']?> MAD</small></p>
                     <?php
                         if($produit['reduction']!=0){
                             ?>
-                            <p class="card-text"><small class=" badge text-bg-danger text-body-secondary">Nouveau prix :<?php echo $produit['prix']*(1-$produit['reduction']/100)?> MAD</small></p>
+                                <div class="d-flex flex-row mb-3">
+                                    <div class="p-2"><h3 class="card-text"><small class="badge text-bg-danger"><strike><?php echo $produit['prix']?> MAD</strike></small></h3></div>
+                                    <div class="p-2"><h3 class="card-text"><small class=" badge text-bg-success"><?php echo $produit['prix']*(1-$produit['reduction']/100)?> MAD</small></h3></div>
+                                </div> 
+                            <?php
+                        }else{
+                            ?>
+                            <div class="p-2"><h3 class="card-text"><small class="badge text-bg-secondary"><?php echo $produit['prix']?> MAD</small></h3></div>
                             <?php
                         }
                     ?>
+                    <p class="card-text"><?php echo $produit['description']?></p>
                     <a class=" btn btn-primary" href="#"> Ajouter au panier</a>
                 </div>
                 </div>
@@ -53,3 +59,5 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
     </div>
 </body>
 </html>
+
+
