@@ -26,28 +26,27 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php include'../include/navbar_front.php' ?>
-   <div class="container">
-        <h4 class="mt-5"></i><?php echo $produit['libelle'] ?></h4>
-        <div class="container">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0 ">
-                    <div class="col-md-4">
-                    <img src="../upload/produit/<?php echo $produit['image']?>" class="img-fluid rounded-start mt-5">
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $produit['libelle']?></h5>
-                        <p class="card-text"><?php echo $produit['description']?></p>
-                        <p class="card-text"><small class="text-body-secondary"> prix :<?php echo $produit['prix']?> MAD</small></p>
-                        <?php
-                            if($produit['reduction']!=0){
-                                ?>
-                                <p class="card-text"><small class=" badge text-bg-danger text-body-secondary">Nouveau prix :<?php echo $produit['prix']*(1-$produit['reduction']/100)?> MAD</small></p>
-                                <?php
-                            }
-                        ?>
-                    </div>
-                    </div>
+    <h4 class="m-5 ps-2"></i><?php echo $produit['libelle'] ?></h4>
+    <div class="container">
+        <div class="card mb-3">
+            <div class="row g-0 ">
+                <div class="col-md-4">
+                <img src="../upload/produit/<?php echo $produit['image']?>" class="img-fluid rounded-start h-100">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $produit['libelle']?></h5>
+                    <p class="card-text"><?php echo $produit['description']?></p>
+                    <p class="card-text"><small class="text-body-secondary"> prix :<?php echo $produit['prix']?> MAD</small></p>
+                    <?php
+                        if($produit['reduction']!=0){
+                            ?>
+                            <p class="card-text"><small class=" badge text-bg-danger text-body-secondary">Nouveau prix :<?php echo $produit['prix']*(1-$produit['reduction']/100)?> MAD</small></p>
+                            <?php
+                        }
+                    ?>
+                    <a class=" btn btn-primary" href="#"> Ajouter au panier</a>
+                </div>
                 </div>
             </div>
         </div>

@@ -12,9 +12,6 @@ $sqlState->execute([$id]);
 $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
 
 // var_dump($produits);
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +29,11 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="mx-auto">
     <?php include'../include/navbar_front.php' ?>
-   <div class="container">
-    <h4 class="mt-5"><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
+    <h4 class="m-5"><i class="<?php echo $categorie['icone'] ?>"></i><?php echo $categorie['libelle'] ?></h4>
         <div class="container">
-            <div class="row justify-content-between mt-5">
+            <div class="row mt-5">
                 <?php
                     foreach($produits as $produit){
                         ?>
