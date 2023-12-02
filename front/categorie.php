@@ -56,7 +56,7 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="card-footer">
                                 <div class="input-group mb-3 z-3">
                                     <button class="btn btn-primary" type="button" onclick="increment()">+</button>
-                                    <input type="text" class="form-control" placeholder="la quantite" min=1 max=99 id="qty">
+                                    <input type="number" class="form-control" placeholder="la quantite" min=1 max=99 id="qty">
                                     <button class="btn btn-primary" type="button" onclick="decrement()">-</button>
                                 </div>
                                 </div>
