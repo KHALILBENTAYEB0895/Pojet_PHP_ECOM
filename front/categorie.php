@@ -28,6 +28,7 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
 </head>
 <body class="mx-auto">
     <?php include'../include/navbar_front.php' ?>
@@ -52,11 +53,19 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                                     ?>
                                     <p class="card-text"><small class="text-body-secondary">Ajouté le : <?= date_format(date_create($produit['date_creation']),'Y/m/d') ?></small></p>
                                 </div>
+                                <div class="card-footer">
+                                <div class="input-group mb-3 z-3">
+                                    <button class="btn btn-primary" type="button">+</button>
+                                    <input type="number" class="form-control" placeholder="la quantite" min=1 max=99>
+                                    <button class="btn btn-primary" type="button">-</button>
+                                </div>
+                                </div>
                             </div>
                         <?php
                     }
                 ?>
             </div>
         </div>
-</body>
+    <script src="../assets/js/produit/counter.js"></script>   
+    </body>
 </html>
