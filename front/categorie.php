@@ -38,7 +38,7 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                 <?php
                     foreach($produits as $produit){
                         ?>
-                            <div class="card mb-5 mx-2 col-md-4 w-25">
+                            <div class="card mb-5 mx-2 col-md-4 w-25 prodCard">
                                 <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top" height="200px">
                                 <div class="card-body">
                                     <a class="btn stretched-link text-primary" href="produit.php?id=<?=$produit['id']?>">Afficher details</a>
@@ -55,9 +55,9 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <div class="card-footer">
                                 <div class="input-group mb-3 z-3">
-                                    <button class="btn btn-primary" type="button" onclick="increment()">+</button>
-                                    <input type="number" class="form-control" placeholder="la quantite" min=1 max=99 id="qty" readonly>
-                                    <button class="btn btn-primary" type="button" onclick="decrement()">-</button>
+                                    <button class="btn btn-primary increment" type="button">+</button>
+                                    <input type="number" class="form-control quantity" placeholder="la quantite" id="qty" readonly>
+                                    <button class="btn btn-primary decrement" type="button">-</button>
                                 </div>
                                 </div>
                             </div>
@@ -66,6 +66,6 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                 ?>
             </div>
         </div>
-    <script src="../assets/js/produit/counter.js"></script>   
+    <script src="../assets/js/produit/quant_produit.js"></script>
     </body>
 </html>
