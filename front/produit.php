@@ -28,7 +28,7 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
     <?php include'../include/navbar_front.php' ?>
     <h4 class="m-5 ps-2"></i><?php echo $produit['libelle'] ?></h4>
     <div class="container">
-        <div class="card mb-3">
+        <div class="card mb-3 prodCard">
             <div class="row g-0 ">
                 <div class="col-md-4">
                 <img src="../upload/produit/<?php echo $produit['image']?>" class="img-fluid rounded-start h-100">
@@ -51,6 +51,7 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
                         }
                     ?>
                     <p class="card-text"><?php echo $produit['description']?></p>
+                    <?php include '../include/front/counter.php' ?>
                     <a class=" btn btn-primary" href="#"> Ajouter au panier</a>
                 </div>
                 </div>

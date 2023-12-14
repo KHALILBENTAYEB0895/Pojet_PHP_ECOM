@@ -28,6 +28,8 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../assets/js/produit/counter.js"></script>
+    <link href="../assets/CSS/produit.css" rel="stylesheet" type="text/css">
    
 </head>
 <body class="mx-auto">
@@ -54,11 +56,7 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                                     <p class="card-text"><small class="text-body-secondary">Ajouté le : <?= date_format(date_create($produit['date_creation']),'Y/m/d') ?></small></p>
                                 </div>
                                 <div class="card-footer">
-                                <div class="input-group mb-3 z-3">
-                                    <button class="btn btn-primary increment" type="button">+</button>
-                                    <input type="number" class="form-control quantity" placeholder="la quantite" id="qty" readonly>
-                                    <button class="btn btn-primary decrement" type="button">-</button>
-                                </div>
+                                <?php include '../include/front/counter.php'?>
                                 </div>
                             </div>
                         <?php
@@ -66,6 +64,6 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
                 ?>
             </div>
         </div>
-    <script src="../assets/js/produit/quant_produit.js"></script>
+    <!-- <script src="../assets/js/produit/counter.js"></script> -->
     </body>
 </html>
