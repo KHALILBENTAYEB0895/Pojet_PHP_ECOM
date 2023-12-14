@@ -39,11 +39,12 @@ $produits=$sqlState->fetchAll(PDO::FETCH_ASSOC);
             <div class="row mt-5">
                 <?php
                     foreach($produits as $produit){
+                        $idProduit = $produit['id'];
                         ?>
                             <div class="card mb-5 mx-2 col-md-4 w-25 prodCard">
                                 <img src="../upload/produit/<?=$produit['image']?>" class="card-img-top" height="200px">
                                 <div class="card-body">
-                                    <a class="btn stretched-link text-primary" href="produit.php?id=<?=$produit['id']?>">Afficher details</a>
+                                    <a class="btn stretched-link text-primary" href="produit.php?id=<?=$idProduit?>">Afficher details</a>
                                     <h5 class="card-title"><?= $produit['libelle']?></h5>
                                     <p class="card-text">Prix : <?= $produit['prix']?> MAD</p>
                                     <?php
