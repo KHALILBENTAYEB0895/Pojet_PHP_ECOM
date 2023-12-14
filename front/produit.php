@@ -37,6 +37,7 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $produit['libelle']?></h5>
                     <?php
+                        // $idProduit = $produit['id'];
                         if($produit['reduction']!=0){
                             ?>
                                 <div class="d-flex flex-row mb-3">
@@ -52,7 +53,6 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
                     ?>
                     <p class="card-text"><?php echo $produit['description']?></p>
                     <?php include '../include/front/counter.php' ?>
-                    <a class=" btn btn-primary" href="#"> Ajouter au panier</a>
                 </div>
                 </div>
             </div>
