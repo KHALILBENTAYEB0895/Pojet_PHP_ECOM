@@ -5,7 +5,7 @@
         $button = $quantity == 0 ? 'Ajouter au panier' : 'Modifier';
         // var_dump($quantity);
     ?>
-        <div class="input-group mb-3 z-3">
+        <div class="input-group mb-3 z-3 w-75">
             <button  class="btn btn-primary decrement" type="button">-</button>
             <input type="number" class="form-control quantity" placeholder="la quantite" name="qty" id="qty" value="<?= $quantity ?>">
             <button  class="btn btn-primary increment" type="button">+</button>

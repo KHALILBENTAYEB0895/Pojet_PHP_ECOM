@@ -28,10 +28,63 @@ require_once'../include/pdo.php';
             <div class="row mt-5">
                 <?php
                     $idUtilisateur = $_SESSION['utilisateur']['id'];
-                    var_dump($_SESSION['panier'][$idUtilisateur]);
+                    $panier = $_SESSION['panier'][$idUtilisateur];
+                    $idProduitsAchetes = array_keys($panier);
+                    $idProduitsAchetes = implode(',',$idProduitsAchetes);
+                    $produits = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduitsAchetes)")->fetchAll(PDO::FETCH_ASSOC);
+                    // var_dump($_SESSION['panier'][$idUtilisateur]);
+                    // var_dump($idProduitsAchetes);
+                    
+                    // var_dump($produits);
+                    if(empty($panier)){
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Votre panier est vide !</strong>
+                        </div>
+                        <?php
+                    }else{
+                        ?>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Nom du produit</th>
+                                <th scope="col">Option</th>
+                                <th scope="col">La quantité</th>
+                                <th scope="col">Prix unitaire</th>
+                                <th scope="col">Total</th>
+
+                                </tr>
+                            </thead>
+                            <?php
+                            $Somme = 0;
+                            foreach($produits as $produit){
+                                $idProduit = $produit['id'];
+                                $quantity = $panier[$produit['id']];
+                                $Somme += $produit['prix'];
+                                ?>
+                                <tbody>
+                                    <tr>
+                                    <td><img width="60px" src="../upload/produit/<?= $produit['image'] ?>"></td>
+                                        <td><?= $produit['libelle'] ?></td>
+                                        <td class="w-25"><?php include"../include/front/counter.php" ?></td>
+                                        <td> x <?= $quantity ?></td>
+                                        <td><?= $produit['prix'];?> MAD</td>
+                                        <td><?= $produit['prix'] * $quantity;?> MAD</td>
+                                    </tr>
+                                </tbody>
+                                <?php
+                            }
+                            ?>
+                            <tfoot>
+                                <tr>Total a payer</tr>
+                            </tfoot>
+                            </table>
+                        <?php
+                    }
                 ?>
             </div>
         </div>
-    <!-- <script src="../assets/js/produit/counter.js"></script> -->
     </body>
 </html>
+
