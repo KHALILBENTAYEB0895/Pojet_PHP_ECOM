@@ -10,17 +10,13 @@ if(!isset($_SESSION['utilisateur'])){
     var_dump($idUtilisateur);
     if(!empty($id) && !empty($qty)){
 
-        if(!isset($_SESSION['panier']['$idUtilisateur'])){
-            $_SESSION['panier']['$idUtilisateur']=[];
+        if(!isset($_SESSION['panier'][$idUtilisateur])){
+            $_SESSION['panier'][$idUtilisateur]=[];
         }
-        $_SESSION['panier']['$idUtilisateur'][]=[
-            'id' => $id,
-            'qty' => $qty
-        ];
-        echo"<pre>";
-            var_dump($_SESSION['panier']);
-        echo"</pre>";
-    }else{
-        header("location: produit.php?id=$id");
+        $_SESSION['panier'][$idUtilisateur][$id]=$qty;
     }
+header("location: produit.php?id=$id");
+
+// session_destroy();
+
 ?>

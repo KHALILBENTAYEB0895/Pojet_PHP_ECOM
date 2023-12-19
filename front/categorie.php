@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once'../include/pdo.php';
 $id = $_GET['id'];
 $sqlState = $pdo->prepare('SELECT * FROM categorie Where id=?');
