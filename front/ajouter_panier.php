@@ -14,8 +14,13 @@ if(!isset($_SESSION['utilisateur'])){
             $_SESSION['panier'][$idUtilisateur]=[];
         }
         $_SESSION['panier'][$idUtilisateur][$id]=$qty;
+        
+        echo "<pre>";
+            var_dump($_SESSION['panier']);
+        echo "<pre>";
+        
     }
-header("location: produit.php?id=$id");
+    header("location: produit.php?id=$id");
 
 // session_destroy();
 
