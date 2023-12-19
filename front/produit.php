@@ -37,7 +37,7 @@ $produit=$sqlState->fetch(PDO::FETCH_ASSOC);
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $produit['libelle']?></h5>
                     <?php
-                        // $idProduit = $produit['id'];
+                         $idProduit = $produit['id'];
                         if($produit['reduction']!=0){
                             ?>
                                 <div class="d-flex flex-row mb-3">
