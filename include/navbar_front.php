@@ -8,7 +8,13 @@
       <div class="navbar-nav col-md-4">
         <a class="nav-link " aria-current="page" href="index.php">Liste des Catégories</a>
       </div>
-      <a class="btn col-md-1" href="cart.php"><i class="fa-solid fa-cart-shopping"></i>Panier</a>
+      
+      <?php
+        $idUtilisateur = $_SESSION['utilisateur']['id'];
+        // var_dump($_SESSION['panier'][$idUtilisateur]);
+      ?>
+      
+      <a class="btn col-md-1" href="panier.php"><i class="fa-solid fa-cart-shopping"></i>Panier(<?= count($_SESSION['panier'][$idUtilisateur]);?>)</a>
     </div>
   </div>
 </nav>
