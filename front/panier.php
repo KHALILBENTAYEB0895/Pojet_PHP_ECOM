@@ -53,7 +53,7 @@ require_once'../include/pdo.php';
                                 <th scope="col">La quantité</th>
                                 <th scope="col">Prix unitaire</th>
                                 <th scope="col">Total</th>
-
+                                <th scope="col">Operations</th>
                                 </tr>
                             </thead>
                             <?php
@@ -70,8 +70,18 @@ require_once'../include/pdo.php';
                                     <td> x <?= $quantity ?></td>
                                     <td><?= $produit['prix'];?> MAD</td>
                                     <td><?= $produit['prix'] * $quantity;?> MAD</td>
+                                    <td>
+                                        <form method="post">
+                                            <input type="hidden" name="idProduit" value="<?= $idProduit ?>">
+                                            <input onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')" type="submit" class="btn btn-danger" value="Supprimer" name="supprimer">
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php
+                            if(isset($_POST['supprimer'])){
+                                $idProduitASupprimer = $_POST['idProduit'];
+                                unset($_SESSION['panier'][$idUtilisateur][$idProduitASupprimer]);
+                            }
                             }
                             ?>
                             <tfoot>
