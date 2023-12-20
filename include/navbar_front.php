@@ -14,7 +14,10 @@
         // var_dump($_SESSION['panier'][$idUtilisateur]);
       ?>
       
-      <a class="btn col-md-1" href="panier.php"><i class="fa-solid fa-cart-shopping"></i>Panier(<?= count($_SESSION['panier'][$idUtilisateur]);?>)</a>
+      <a class="btn col-md-1" href="panier.php"><i class="fa-solid fa-cart-shopping"></i>Panier(<?php echo count($_SESSION['panier'][$idUtilisateur])?>)</a>
     </div>
   </div>
 </nav>
+<?php
+// if(isset())
+?>
