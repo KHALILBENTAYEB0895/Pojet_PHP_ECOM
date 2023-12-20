@@ -7,8 +7,7 @@ if(!isset($_SESSION['utilisateur'])){
 $id = $_POST['id'];
 $qty = $_POST['qty'];
 $idUtilisateur = $_SESSION['utilisateur']['id'];
-var_dump($idUtilisateur);
-
+// var_dump($idUtilisateur);
 if(!isset($_SESSION['panier'][$idUtilisateur])){
     $_SESSION['panier'][$idUtilisateur]=[];
 }
@@ -17,12 +16,11 @@ if($qty == 0){
 }else{
     $_SESSION['panier'][$idUtilisateur][$id]=$qty;
 }
-echo "<pre>";
-    var_dump($_SESSION['panier']);
-echo "<pre>";
-
-header("location: produit.php?id=$id");
-
+// echo "<pre>";
+//     var_dump($_SESSION['panier']);
+// echo "<pre>";
+header("location: panier.php");
+// header("location".$_SERVER['HTTP_REFERER']);
 // session_destroy();
 
 ?>
