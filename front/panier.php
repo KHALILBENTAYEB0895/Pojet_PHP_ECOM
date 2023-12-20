@@ -29,9 +29,6 @@ require_once'../include/pdo.php';
                 <?php
                     $idUtilisateur = $_SESSION['utilisateur']['id'];
                     $panier = $_SESSION['panier'][$idUtilisateur];
-                    $idProduitsAchetes = array_keys($panier);
-                    $idProduitsAchetes = implode(',',$idProduitsAchetes);
-                    $produits = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduitsAchetes)")->fetchAll(PDO::FETCH_ASSOC);
                     // var_dump($_SESSION['panier'][$idUtilisateur]);
                     // var_dump($idProduitsAchetes);
                     
@@ -43,6 +40,9 @@ require_once'../include/pdo.php';
                         </div>
                         <?php
                     }else{
+                            $idProduitsAchetes = array_keys($panier);
+                            $idProduitsAchetes = implode(',',$idProduitsAchetes);
+                            $produits = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduitsAchetes)")->fetchAll(PDO::FETCH_ASSOC);
                         ?>
                         <table class="table table-hover">
                             <thead>
@@ -61,23 +61,41 @@ require_once'../include/pdo.php';
                             foreach($produits as $produit){
                                 $idProduit = $produit['id'];
                                 $quantity = $panier[$produit['id']];
-                                $Somme += $produit['prix'];
+                                $Somme += $produit['prix'] * $quantity;
                                 ?>
-                                <tbody>
-                                    <tr>
+                                <tr>
                                     <td><img width="60px" src="../upload/produit/<?= $produit['image'] ?>"></td>
-                                        <td><?= $produit['libelle'] ?></td>
-                                        <td class="w-25"><?php include"../include/front/counter.php" ?></td>
-                                        <td> x <?= $quantity ?></td>
-                                        <td><?= $produit['prix'];?> MAD</td>
-                                        <td><?= $produit['prix'] * $quantity;?> MAD</td>
-                                    </tr>
-                                </tbody>
-                                <?php
+                                    <td><?= $produit['libelle'] ?></td>
+                                    <td class="w-25"><?php include"../include/front/counter.php" ?></td>
+                                    <td> x <?= $quantity ?></td>
+                                    <td><?= $produit['prix'];?> MAD</td>
+                                    <td><?= $produit['prix'] * $quantity;?> MAD</td>
+                                </tr>
+                            <?php
                             }
                             ?>
                             <tfoot>
-                                <tr>Total a payer</tr>
+                                <tr>
+                                    <td colspan="5" align="right"><strong>Total a payer</strong></td>
+                                    <td ><?= $Somme ?> MAD</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" align="right">
+                                        <?php
+                                        if(isset($_POST['vider'])){
+                                            foreach($produits as $produit){
+                                                $idProduit = $produit['id'];
+                                                unset($_SESSION['panier'][$idUtilisateur][$idProduit]);
+                                                echo '<script type="text/javascript">location.reload();</script>';
+                                            }
+                                        }
+                                        ?>
+                                        <form method="post">
+                                            <input type="submit" class="btn btn-primary" name="valider" value="Valider la commande">
+                                            <input onclick="return confirm('Voulez-vous vraiment vider le panier ?')" type="submit" class="btn btn-danger" name="vider" value="Vider le panier">
+                                        </form>
+                                    </td>
+                                </tr>
                             </tfoot>
                             </table>
                         <?php
