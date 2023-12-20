@@ -14,7 +14,18 @@
         // var_dump($_SESSION['panier'][$idUtilisateur]);
       ?>
       
-      <a class="btn col-md-1" href="panier.php"><i class="fa-solid fa-cart-shopping"></i>Panier(<?php echo count($_SESSION['panier'][$idUtilisateur])?>)</a>
+      <a class="btn col-md-2" href="panier.php"><i class="fa-solid fa-cart-shopping"></i>
+        Panier(
+          <?php
+            // Vérifie si le panier existe et n'est pas vide
+            if(isset($_SESSION['panier'][$idUtilisateur]) && !empty($_SESSION['panier'][$idUtilisateur])) {
+                echo count($_SESSION['panier'][$idUtilisateur]);
+            } else {
+                echo '0';
+            }
+            ?>
+        )
+      </a>
     </div>
   </div>
 </nav>
