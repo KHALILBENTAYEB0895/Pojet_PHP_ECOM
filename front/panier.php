@@ -19,20 +19,26 @@ require_once'../include/pdo.php';
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../assets/js/produit/counter.js"></script>
     <link href="../assets/CSS/produit.css" rel="stylesheet" type="text/css">
-   
 </head>
 <body class="mx-auto">
-    <?php include'../include/navbar_front.php' ?>
+    <?php 
+    include'../include/navbar_front.php';
+    $idUtilisateur = $_SESSION['utilisateur']['id'];
+    $panier = $_SESSION['panier'][$idUtilisateur];
+// supprimer produit
+    if(isset($_POST['supprimer'])){
+        $idProduitASupprimer = $_POST['idProduit'];
+        unset($_SESSION['panier'][$idUtilisateur][$idProduitASupprimer]);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    }
+//partir Vider
+
+    ?>
     <h4 class="m-5">Mes achats</h4>
         <div class="container">
             <div class="row mt-5">
                 <?php
-                    $idUtilisateur = $_SESSION['utilisateur']['id'];
-                    $panier = $_SESSION['panier'][$idUtilisateur];
-                    // var_dump($_SESSION['panier'][$idUtilisateur]);
-                    // var_dump($idProduitsAchetes);
-                    
-                    // var_dump($produits);
                     if(empty($panier)){
                         ?>
                         <div class="alert alert-danger" role="alert">
@@ -78,10 +84,6 @@ require_once'../include/pdo.php';
                                     </td>
                                 </tr>
                             <?php
-                            if(isset($_POST['supprimer'])){
-                                $idProduitASupprimer = $_POST['idProduit'];
-                                unset($_SESSION['panier'][$idUtilisateur][$idProduitASupprimer]);
-                            }
                             }
                             ?>
                             <tfoot>
