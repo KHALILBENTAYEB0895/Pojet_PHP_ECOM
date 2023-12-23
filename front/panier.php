@@ -49,7 +49,7 @@ require_once'../include/pdo.php';
         }
         var_dump($total);
         $sqlStateCommande = $pdo->prepare('INSERT INTO commande($idClient,total) values(?,?)') ;
-        $sqlStateCommande->execute(['$paniUtilisateur,total']);                              
+        $sqlStateCommande->execute(['$paniUtilisateur,$total']);                              
     }
     ?>
     <h4 class="m-5">Mes achats</h4>
