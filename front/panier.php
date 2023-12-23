@@ -47,9 +47,9 @@ require_once'../include/pdo.php';
             $prix = $produit['prix'];
             $total+=$qty*$prix;
         }
-        // $idClient = $idUtilisateur;
-        // $sqlStateCommande = $pdo->prepare('INSERT INTO commande($idClient,total) values(?,?)') ;
-        // $sqlStateCommande->execute(['$paniUtilisateur,total']);                              
+        var_dump($total);
+        $sqlStateCommande = $pdo->prepare('INSERT INTO commande($idClient,total) values(?,?)') ;
+        $sqlStateCommande->execute(['$paniUtilisateur,total']);                              
     }
     ?>
     <h4 class="m-5">Mes achats</h4>
