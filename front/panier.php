@@ -25,6 +25,12 @@ require_once'../include/pdo.php';
     include'../include/navbar_front.php';
     $idUtilisateur = $_SESSION['utilisateur']['id'];
     $panier = $_SESSION['panier'][$idUtilisateur];
+
+    if(!empty($panier)){
+        $idProduitsAchetes = array_keys($panier);
+        $idProduitsAchetes = implode(',',$idProduitsAchetes);
+        $produits = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduitsAchetes)")->fetchAll(PDO::FETCH_ASSOC);
+    }
 // supprimer produit
     if(isset($_POST['supprimer'])){
         $idProduitASupprimer = $_POST['idProduit'];
@@ -32,8 +38,19 @@ require_once'../include/pdo.php';
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit();
     }
-//partir Vider
-
+    if(isset($_POST['valider'])){
+        $sql = '';
+        $total = 0;
+        foreach($produits as $produit){
+            $idProduit = $produit['id'];
+            $qty = $panier[$idProduit];
+            $prix = $produit['prix'];
+            $total+=$qty*$prix;
+        }
+        // $idClient = $idUtilisateur;
+        // $sqlStateCommande = $pdo->prepare('INSERT INTO commande($idClient,total) values(?,?)') ;
+        // $sqlStateCommande->execute(['$paniUtilisateur,total']);                              
+    }
     ?>
     <h4 class="m-5">Mes achats</h4>
         <div class="container">
@@ -46,9 +63,6 @@ require_once'../include/pdo.php';
                         </div>
                         <?php
                     }else{
-                            $idProduitsAchetes = array_keys($panier);
-                            $idProduitsAchetes = implode(',',$idProduitsAchetes);
-                            $produits = $pdo->query("SELECT * FROM produit WHERE id IN ($idProduitsAchetes)")->fetchAll(PDO::FETCH_ASSOC);
                         ?>
                         <table class="table table-hover">
                             <thead>
