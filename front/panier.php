@@ -72,7 +72,12 @@ require_once'../include/pdo.php';
             $sqlLigneCommande->bindParam(':total'.$id, $produit['total'] );
         }
         $inserted = $sqlLigneCommande->execute();
-        
+        foreach($produits as $produit){
+            $idProduit = $produit['id'];
+            unset($_SESSION['panier'][$idUtilisateur][$idProduit]);
+            header('Location: ' . $_SERVER['PHP_SELF']);
+        }
+        exit(); 
     }
     ?>
     <h4 class="m-5">Mes achats</h4>
