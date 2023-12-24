@@ -39,7 +39,7 @@ require_once'../include/pdo.php';
         exit();
     }
     if(isset($_POST['valider'])){
-        $sql = '';
+        $sql = 'INSERT INTO ligne_commande(id_produit,id_commande,prix,quantité,total) VALUES';
         $total = 0;
         $ligneCommandes = [];
         foreach($produits as $produit){
@@ -54,15 +54,24 @@ require_once'../include/pdo.php';
                 'total' => $qty*$prix
             ];
         }
-        Var_dump($ligneCommandes);
         $sqlStateCommande = $pdo->prepare('INSERT INTO commande(id_client,total) VALUES(?,?)') ;
         $sqlStateCommande->execute([$idUtilisateur, $total]);  
         $idCommande =$pdo->lastInsertId();
         
         foreach($ligneCommandes as $produit){
-            $sqlLigneCommande = $pdo->prepare('INSERT INTO ligne_commande(id_produit,id_commande,prix,quantité,total) VALUES(?,?,?,?,?)') ;
-            $sqlLigneCommande->execute([$produit['id'], $idCommande, $produit['prix'], $produit['qty'], $produit['total']]);
+            $id = $produit['id'];
+            $sql .= "(:id$id,'$idCommande', :prix$id, :qty$id, :total$id),";
         }
+        $sql = substr($sql, 0, -1);
+        $sqlLigneCommande = $pdo->prepare($sql);
+        foreach($ligneCommandes as $produit){
+            $id = $produit['id'];
+            $sqlLigneCommande->bindParam(':id'.$id, $produit['id'] );
+            $sqlLigneCommande->bindParam(':prix'.$id, $produit['prix'] );
+            $sqlLigneCommande->bindParam(':qty'.$id, $produit['qty'] );
+            $sqlLigneCommande->bindParam(':total'.$id, $produit['total'] );
+        }
+        $inserted = $sqlLigneCommande->execute();
         
     }
     ?>
@@ -131,8 +140,8 @@ require_once'../include/pdo.php';
                                         }
                                         ?>
                                         <form method="post">
-                                            <input type="submit" class="btn btn-primary" name="valider" value="Valider la commande">
                                             <input onclick="return confirm('Voulez-vous vraiment vider le panier ?')" type="submit" class="btn btn-danger" name="vider" value="Vider le panier">
+                                            <input type="submit" class="btn btn-primary" name="valider" value="Valider la commande">  
                                         </form>
                                     </td>
                                 </tr>
