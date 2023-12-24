@@ -41,15 +41,29 @@ require_once'../include/pdo.php';
     if(isset($_POST['valider'])){
         $sql = '';
         $total = 0;
+        $ligneCommandes = [];
         foreach($produits as $produit){
             $idProduit = $produit['id'];
             $qty = $panier[$idProduit];
             $prix = $produit['prix'];
-            $total+=$qty*$prix;
+            $total += $qty*$prix;
+            $ligneCommandes[$idProduit] = [
+                'id' => $idProduit,
+                'prix' => $prix,
+                'qty' => $qty,
+                'total' => $qty*$prix
+            ];
         }
-        var_dump($total);
-        $sqlStateCommande = $pdo->prepare('INSERT INTO commande($idClient,total) values(?,?)') ;
-        $sqlStateCommande->execute(['$paniUtilisateur,$total']);                              
+        Var_dump($ligneCommandes);
+        $sqlStateCommande = $pdo->prepare('INSERT INTO commande(id_client,total) VALUES(?,?)') ;
+        $sqlStateCommande->execute([$idUtilisateur, $total]);  
+        $idCommande =$pdo->lastInsertId();
+        
+        foreach($ligneCommandes as $produit){
+            $sqlLigneCommande = $pdo->prepare('INSERT INTO ligne_commande(id_produit,id_commande,prix,quantité,total) VALUES(?,?,?,?,?)') ;
+            $sqlLigneCommande->execute([$produit['id'], $idCommande, $produit['prix'], $produit['qty'], $produit['total']]);
+        }
+        
     }
     ?>
     <h4 class="m-5">Mes achats</h4>
